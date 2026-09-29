@@ -1,0 +1,20 @@
+{
+  "validation_status": "PASSED",
+  "matrix_dimensions": {
+    "X_train_final": [
+      1070,
+      63
+    ],
+    "X_test_final": [
+      268,
+      63
+    ],
+    "y_train": [
+      1070
+    ],
+    "y_test": [
+      268
+    ]
+  },
+  "errors": []
+}

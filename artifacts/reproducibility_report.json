@@ -1,0 +1,17 @@
+{
+  "test_name": "Coffee regression reproducibility validation",
+  "parameters": {
+    "n_estimators": 100,
+    "max_depth": 10,
+    "random_state": 42,
+    "n_jobs": 1
+  },
+  "metrics": {
+    "mae": 1.649575406978591,
+    "rmse": 2.6284361774870684,
+    "r2": 0.2611690540907119
+  },
+  "predictions_identical": true,
+  "max_absolute_prediction_difference": 0.0,
+  "status": "PASSED"
+}

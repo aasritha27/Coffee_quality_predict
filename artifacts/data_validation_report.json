@@ -1,0 +1,10 @@
+{
+  "dataset": "C:\\Users\\nagal\\Downloads\\coffee-quality-mlops\\coffee-quality-mlops\\data\\raw\\merged_data.csv",
+  "validation_status": "PASSED",
+  "errors": [],
+  "rows": 1339,
+  "columns": 43,
+  "positive_target_rows": 1338,
+  "duplicate_rows": 0,
+  "missing_required_columns": []
+}

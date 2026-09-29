@@ -1,4 +1,4 @@
-# Coffee Quality Prediction — MLOps Labs 1–4
+# Coffee Quality Prediction — MLOps Labs 1–6
 
 Regression project on the Coffee Quality Institute (CQI) data
 (<https://www.kaggle.com/datasets/volpatto/coffee-quality-database-from-cqi>).
@@ -20,10 +20,14 @@ python src/evaluate.py               # Lab 2  -> outputs/*.csv, baseline_metrics
 bash scripts/git_workflow_lab3.sh    # Lab 3  -> branches, conflict, revert, tag (Git Bash / Linux / macOS)
 python src/run_experiments.py        # Lab 4  -> 8 tracked runs
 python src/check_reproducibility.py  # Lab 4  -> same config twice, predictions compared
-mlflow ui --backend-store-uri sqlite:///mlflow.db
+python scripts/run_lab5_pipeline.py  # Lab 5  -> validate data, preprocess, validate outputs, reproduce
+python scripts/run_lab6_registry.py  # Lab 6  -> register candidate, promote champion, report deployment info
+mlflow ui --backend-store-uri sqlite:///mlflow.db --workers 1 --host 127.0.0.1
 ```
 MLflow ≥ 3 no longer supports the plain `./mlruns` file store, so run metadata is in `mlflow.db`
 and artifacts (plots, model) are under `mlruns/`. Both are git-ignored and created by your own runs.
+The Lab 6 registry uses the `candidate` and `champion` model aliases and promotes a candidate only
+when its test-set R² is higher. On Windows, `--workers 1` avoids multi-worker socket startup failures.
 
 ## Key design decisions
 - **Leakage guard:** the 10 sensory cup scores sum to `Total.Cup.Points`; they are excluded so the model
