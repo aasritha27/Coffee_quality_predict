@@ -1,0 +1,26 @@
+Species,Country.of.Origin,Variety,Processing.Method,Total.Cup.Points,predicted,error
+Arabica,Nicaragua,Caturra,Other,63.08,81.20095430217596,18.12095430217596
+Arabica,Mexico,Bourbon,Washed / Wet,68.33,79.68215666315614,11.352156663156137
+Arabica,Haiti,Unknown,Unknown,72.33,83.040710227434,10.710710227434006
+Arabica,Honduras,Catuai,Washed / Wet,69.17,79.79582608458102,10.625826084581021
+Arabica,Costa Rica,Caturra,Washed / Wet,71.75,81.48444906120022,9.734449061200223
+Arabica,Guatemala,Bourbon,Washed / Wet,74.33,82.22425125721082,7.894251257210826
+Arabica,United States (Hawaii),Unknown,Natural / Dry,76.17,83.00837718298693,6.838377182986932
+Arabica,Mexico,Typica,Washed / Wet,74.33,81.09745738667598,6.767457386675986
+Arabica,Honduras,Catuai,Washed / Wet,69.33,75.45706459845508,6.127064598455078
+Arabica,Mexico,Typica,Washed / Wet,76.42,81.11255005981991,4.692550059819908
+Arabica,Peru,Typica,Washed / Wet,79.0,83.61001223769672,4.610012237696722
+Arabica,Haiti,Typica,Washed / Wet,77.25,81.5396991995723,4.289699199572297
+Arabica,Mexico,Typica,Washed / Wet,76.17,80.44177766462622,4.271777664626214
+Robusta,Vietnam,Unknown,Natural / Dry,73.75,77.73008812501368,3.9800881250136797
+Arabica,Guatemala,Bourbon,Washed / Wet,74.75,78.34116277550608,3.5911627755060778
+Arabica,Mexico,Mundo Novo,Washed / Wet,75.17,78.6475319114862,3.477531911486196
+Arabica,Nicaragua,Unknown,Natural / Dry,78.58,82.03227415566515,3.452274155665151
+Arabica,Guatemala,Bourbon,Washed / Wet,79.75,82.88215354757627,3.132153547576266
+Arabica,United States (Hawaii),Hawaiian Kona,Natural / Dry,78.0,81.13148805191922,3.13148805191922
+Robusta,Ecuador,Unknown,Unknown,78.75,81.53297407832068,2.7829740783206773
+Arabica,Guatemala,Other,Washed / Wet,78.0,80.6920490333907,2.6920490333907026
+Arabica,Mexico,Caturra,Washed / Wet,78.5,81.09632744265119,2.5963274426511873
+Arabica,Mexico,Typica,Washed / Wet,78.58,81.12656662729596,2.5465666272959595
+Arabica,United States (Hawaii),Unknown,Unknown,79.92,82.43051827244628,2.5105182724462765
+Arabica,Guatemala,Other,Washed / Wet,79.0,81.44059833067158,2.440598330671577

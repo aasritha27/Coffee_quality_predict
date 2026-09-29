@@ -1,0 +1,11 @@
+species,country_of_origin,variety,total_cup_points,pred,abs_err
+Arabica,Nicaragua,Caturra,63.08,71.81,8.73
+Arabica,Mexico,Bourbon,68.33,75.75,7.42
+Arabica,Myanmar,Other,80.25,75.18,5.07
+Arabica,Colombia,Typica,80.25,84.78,4.53
+Arabica,United States (Hawaii),Unknown,76.17,80.67,4.5
+Arabica,Mexico,Typica,76.42,73.17,3.25
+Arabica,Brazil,Bourbon,82.33,85.42,3.09
+Arabica,Brazil,Mundo Novo,81.0,84.07,3.07
+Arabica,Mexico,Mundo Novo,75.17,78.04,2.87
+Arabica,Brazil,Bourbon,82.33,85.04,2.71

@@ -1,0 +1,30 @@
+{
+  "model": "gradient_boosting",
+  "target": "total_cup_points",
+  "numeric_features": [
+    "moisture",
+    "category_one_defects",
+    "quakers",
+    "category_two_defects",
+    "altitude_low_meters",
+    "altitude_high_meters",
+    "altitude_mean_meters",
+    "number_of_bags",
+    "aroma",
+    "flavor",
+    "aftertaste",
+    "acidity",
+    "body",
+    "balance"
+  ],
+  "categorical_features": [
+    "species",
+    "country_of_origin",
+    "variety",
+    "processing_method",
+    "color"
+  ],
+  "cv_accuracy_%": 79.27,
+  "test_accuracy_%": 84.68,
+  "test_mae": 0.672
+}
