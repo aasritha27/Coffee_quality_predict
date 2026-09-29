@@ -1,26 +1,26 @@
 Species,Country.of.Origin,Variety,Processing.Method,Total.Cup.Points,predicted,error
 Arabica,Honduras,Catuai,Washed / Wet,84.75,75.98944702189274,-8.760552978107256
-Arabica,Mexico,Typica,Washed / Wet,83.92,76.11026289592762,-7.809737104072383
+Arabica,Mexico,Typica,Washed / Wet,83.92,75.98956289592762,-7.930437104072382
 Arabica,Mexico,Other,Washed / Wet,87.17,81.25715792041,-5.912842079590007
-Arabica,United States (Hawaii),Hawaiian Kona,Natural / Dry,84.83,79.36222661580666,-5.467773384193336
-Arabica,Mexico,Typica,Washed / Wet,84.67,80.86288056443512,-3.8071194355648856
+Arabica,United States (Hawaii),Hawaiian Kona,Natural / Dry,84.83,79.17632661580669,-5.653673384193311
+Arabica,Mexico,Typica,Washed / Wet,84.67,80.86288056443514,-3.807119435564857
 Arabica,United States (Hawaii),Hawaiian Kona,Natural / Dry,84.08,80.3894211255764,-3.6905788744235934
-Arabica,Costa Rica,Catuai,Washed / Wet,84.67,81.12335298454883,-3.546647015451171
+Arabica,Costa Rica,Catuai,Washed / Wet,84.67,81.12335298454884,-3.546647015451157
+Arabica,Guatemala,Bourbon,Washed / Wet,83.67,80.1462274268898,-3.5237725731102074
 Arabica,Uganda,Unknown,Semi-washed / Semi-pulped,86.0,82.49868648899923,-3.501313511000774
-Arabica,Guatemala,Bourbon,Washed / Wet,83.67,80.20899885546123,-3.46100114453877
-Arabica,Kenya,SL34,Washed / Wet,86.25,82.99012687836422,-3.2598731216357777
-Arabica,Ethiopia,Other,Natural / Dry,88.25,85.03182177197802,-3.2181782280219835
-Arabica,Taiwan,Typica,Semi-washed / Semi-pulped,84.92,81.74900137689862,-3.170998623101383
+Arabica,Ethiopia,Other,Natural / Dry,88.25,84.97103843864468,-3.2789615613553167
+Arabica,Kenya,SL34,Washed / Wet,86.25,82.98842687836421,-3.2615731216357915
+Arabica,Taiwan,Typica,Semi-washed / Semi-pulped,84.92,81.75810137689862,-3.1618986231013793
 Arabica,United States (Hawaii),Unknown,Unknown,86.25,83.33505935928761,-2.9149406407123877
-Arabica,Taiwan,Typica,Washed / Wet,84.67,81.79367499620757,-2.876325003792431
+Arabica,Taiwan,Typica,Washed / Wet,84.67,81.79367499620759,-2.8763250037924166
 Arabica,Mexico,Bourbon,Washed / Wet,83.0,80.16391539412841,-2.8360846058715907
-Arabica,Brazil,Bourbon,Natural / Dry,86.92,84.1233607948031,-2.7966392051968967
-Arabica,China,Other,Washed / Wet,84.5,81.71368142113836,-2.786318578861639
-Arabica,Guatemala,Bourbon,Washed / Wet,84.67,82.02440775590581,-2.645592244094189
-Arabica,Panama,Caturra,Natural / Dry,85.5,82.91034041669003,-2.5896595833099667
-Arabica,Uganda,SL14,Washed / Wet,85.5,82.942070446112,-2.557929553888002
-Arabica,United States (Hawaii),Hawaiian Kona,Natural / Dry,83.08,80.54330032741345,-2.5366996725865505
-Arabica,Ethiopia,Unknown,Natural / Dry,88.08,85.58959202380953,-2.4904079761904683
-Arabica,Mexico,Pacamara,Unknown,85.0,82.55447443362668,-2.4455255663733197
-Arabica,Brazil,Bourbon,Semi-washed / Semi-pulped,86.08,83.63735975570638,-2.4426402442936137
-Arabica,United States (Puerto Rico),Other,Washed / Wet,83.75,81.42025181690914,-2.3297481830908566
+Arabica,Brazil,Bourbon,Natural / Dry,86.92,84.12336079480312,-2.7966392051968825
+Arabica,China,Other,Washed / Wet,84.5,81.71618142113839,-2.783818578861613
+Arabica,Guatemala,Bourbon,Washed / Wet,84.67,82.05270775590583,-2.6172922440941733
+Arabica,Panama,Caturra,Natural / Dry,85.5,82.91127375002337,-2.588726249976631
+Arabica,Uganda,SL14,Washed / Wet,85.5,82.94207044611197,-2.5579295538880302
+Arabica,United States (Hawaii),Hawaiian Kona,Natural / Dry,83.08,80.53580032741345,-2.5441996725865437
+Arabica,Ethiopia,Unknown,Natural / Dry,88.08,85.56664202380955,-2.5133579761904485
+Arabica,Mexico,Pacamara,Unknown,85.0,82.57447443362668,-2.4255255663733237
+Arabica,Brazil,Bourbon,Semi-washed / Semi-pulped,86.08,83.66155975570638,-2.4184402442936204
+Arabica,United States (Puerto Rico),Other,Washed / Wet,83.75,81.42025181690916,-2.3297481830908424
