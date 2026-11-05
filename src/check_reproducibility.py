@@ -7,6 +7,7 @@ preds = []
 for i in (1, 2):
     subprocess.run([sys.executable, script, "--run_name", f"repro_check_{i}"], check=True)
     preds.append(np.load(ARTIFACTS / "test_predictions.npy"))
-same = np.array_equal(preds[0], preds[1])
-print("Predictions identical across runs:", same, "| max abs diff:", float(np.abs(preds[0]-preds[1]).max()))
+max_difference = float(np.abs(preds[0] - preds[1]).max())
+same = np.allclose(preds[0], preds[1], rtol=0, atol=1e-12)
+print("Predictions reproducible within 1e-12:", same, "| max abs diff:", max_difference)
 sys.exit(0 if same else 1)

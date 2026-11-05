@@ -1,0 +1,33 @@
+{
+  "target": "Total.Cup.Points",
+  "dataset": "Coffee Quality Institute (CQI) arabica + robusta reviews",
+  "feature_count": 63,
+  "scikit_learn_version": "1.9.1",
+  "numpy_version": "2.5.3",
+  "model_version": "1",
+  "registry_name": "Coffee_Quality_Production_Model",
+  "run_id": "67bb236f5a3049859f557272f83c8e67",
+  "metrics": {
+    "mae": 1.6241117424616123,
+    "rmse": 2.6056957069195033,
+    "r2": 0.2738980548948765
+  },
+  "numeric_features": [
+    "Number.of.Bags",
+    "Bag.Weight.kg",
+    "Harvest.Year.num",
+    "Moisture",
+    "Category.One.Defects",
+    "Quakers",
+    "Category.Two.Defects",
+    "altitude_mean_meters"
+  ],
+  "categorical_features": [
+    "Species",
+    "Country.of.Origin",
+    "Variety",
+    "Processing.Method",
+    "Color"
+  ],
+  "number_of_bags_cap": 370.709999999998
+}

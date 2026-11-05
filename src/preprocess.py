@@ -26,18 +26,21 @@ def parse_year(x):
     return float(m.group(1)) if m else np.nan
 
 
-def clean(df):
+def clean(df, number_of_bags_cap=None, verbose=True):
     df = df.copy()
     n0 = len(df)
     df = df[df[TARGET] > 0].reset_index(drop=True)          # a 0-point lot is a data error
     df["Bag.Weight.kg"] = df["Bag.Weight"].map(parse_weight_kg).clip(upper=1000)
     df["Harvest.Year.num"] = df["Harvest.Year"].map(parse_year)
-    df["Number.of.Bags"] = df["Number.of.Bags"].clip(upper=df["Number.of.Bags"].quantile(0.99))
+    if number_of_bags_cap is None:
+        number_of_bags_cap = df["Number.of.Bags"].quantile(0.99)
+    df["Number.of.Bags"] = df["Number.of.Bags"].clip(upper=number_of_bags_cap)
     df.loc[df["altitude_mean_meters"] > 5000, "altitude_mean_meters"] = np.nan  # impossible values
     df.loc[df["Moisture"] > 0.5, "Moisture"] = np.nan
     for c in CATEGORICAL:
         df[c] = df[c].astype("object").where(df[c].notna(), "Unknown").astype(str).str.strip()
-    print(f"Cleaning: {n0} -> {len(df)} rows")
+    if verbose:
+        print(f"Cleaning: {n0} -> {len(df)} rows")
     return df
 
 

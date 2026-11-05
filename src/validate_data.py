@@ -1,21 +1,24 @@
 """Validate the raw CQI coffee dataset before preprocessing."""
 import json
 import sys
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 from common import ARTIFACTS, NUMERIC, RAW, TARGET, CATEGORICAL
 
 
-def validate_data() -> bool:
+def validate_data(data_path=RAW, report_path=None) -> bool:
     errors = []
-    if not RAW.is_file():
-        errors.append(f"Raw dataset not found: {RAW}")
+    data_path = Path(data_path)
+    report_path = Path(report_path) if report_path else ARTIFACTS / "data_validation_report.json"
+    if not data_path.is_file():
+        errors.append(f"Raw dataset not found: {data_path}")
         frame = None
     else:
-        frame = pd.read_csv(RAW)
+        frame = pd.read_csv(data_path)
 
-    report = {"dataset": str(RAW), "validation_status": "FAILED", "errors": errors}
+    report = {"dataset": str(data_path), "validation_status": "FAILED", "errors": errors}
     if frame is not None:
         derived = {"Bag.Weight.kg", "Harvest.Year.num"}
         required = set(NUMERIC + CATEGORICAL + [TARGET, "Bag.Weight", "Harvest.Year"]) - derived
@@ -43,8 +46,7 @@ def validate_data() -> bool:
         })
 
     report["validation_status"] = "PASSED" if not errors else "FAILED"
-    ARTIFACTS.mkdir(parents=True, exist_ok=True)
-    report_path = ARTIFACTS / "data_validation_report.json"
+    report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
 
     if errors:

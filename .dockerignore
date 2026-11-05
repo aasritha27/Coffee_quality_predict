@@ -1,0 +1,16 @@
+.git
+.venv
+__pycache__
+*.py[cod]
+*.ipynb
+mlruns
+mlflow.db
+outputs
+notebooks
+tests
+scripts
+pipelines
+reports
+data
+models
+artifacts

@@ -1,0 +1,14 @@
+{
+  "status": "PASSED",
+  "metrics": {
+    "mae": 1.6495754069785908,
+    "rmse": 2.628436177487068,
+    "r2": 0.2611690540907121,
+    "dummy_mae": 1.9599407867206013
+  },
+  "release_checks": [
+    "MAE, RMSE, R2, and dummy MAE are finite",
+    "Model MAE is lower than dummy-baseline MAE"
+  ],
+  "errors": []
+}

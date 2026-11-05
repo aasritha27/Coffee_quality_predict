@@ -1,27 +1,80 @@
-# Coffee Quality Prediction — MLOps Labs 1–6
+# Coffee Quality Prediction — MLOps Labs 1–11
 
 Regression project on the Coffee Quality Institute (CQI) data
 (<https://www.kaggle.com/datasets/volpatto/coffee-quality-database-from-cqi>).
-Target: `Total.Cup.Points`. Same lab structure as the Telco churn guide (preprocess → baseline → Git → MLflow).
+Target: `Total.Cup.Points`. The churn-project ZIP is used only as a layout and workflow reference; all data,
+features, models, and API behavior here are coffee-quality-specific.
 
-## Setup (from the project root)
-```bash
-python -m venv .venv                 # Windows: py -3.11 -m venv .venv
-source .venv/bin/activate            # PowerShell: .venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+## Setup (PowerShell, from the project root)
+
+The project is inside the `coffee-quality-mlops` subfolder. From the parent folder, enter it first:
+```powershell
+Set-Location .\coffee-quality-mlops
 ```
 
-## Run order
-```bash
-python src/merge_data.py             # (only if you re-download arabica/robusta files) -> data/raw/merged_data.csv
-python src/preprocess.py             # Lab 1  -> data/processed/*.npy, models/{imputer,scaler,ohe}.pkl, metadata
-python src/train.py                  # Lab 2  -> models/random_forest_baseline.pkl
-python src/evaluate.py               # Lab 2  -> outputs/*.csv, baseline_metrics.json
-bash scripts/git_workflow_lab3.sh    # Lab 3  -> branches, conflict, revert, tag (Git Bash / Linux / macOS)
-python src/run_experiments.py        # Lab 4  -> 8 tracked runs
-python src/check_reproducibility.py  # Lab 4  -> same config twice, predictions compared
-python scripts/run_lab5_pipeline.py  # Lab 5  -> validate data, preprocess, validate outputs, reproduce
-python scripts/run_lab6_registry.py  # Lab 6  -> register candidate, promote champion, report deployment info
+If this project already has a `.venv`, activate it instead of creating it again:
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+For a fresh environment, Python 3.13 is available through the Windows launcher on this machine:
+```powershell
+py -3.13 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+Then install the dependencies:
+```powershell
+python -m pip install -r requirements.txt
+```
+
+## Labs 1–6
+```powershell
+python src\merge_data.py             # Optional: only after re-downloading source CSVs
+python src\preprocess.py             # Lab 1: preprocess, split, and save reusable transformers
+python src\train.py                  # Lab 2: train baseline
+python src\evaluate.py               # Lab 2: metrics and error-analysis CSVs
+bash scripts/git_workflow_lab3.sh   # Lab 3: Git exercise (Git Bash required; commits and rewrites train.py)
+python src\run_experiments.py        # Lab 4: eight MLflow runs
+python src\check_reproducibility.py  # Lab 4: deterministic training check
+python scripts\run_lab5_pipeline.py  # Lab 5: validation/preprocessing/reproducibility pipeline
+python scripts\run_lab6_registry.py  # Lab 6: candidate/champion registry lifecycle
+```
+
+Lab 3 is an intentional Git exercise: it creates commits, branches, a merge conflict, a revert, and a tag.
+Run it only in a disposable clone or after saving/committing your own work.
+
+## Labs 7–11
+```powershell
+python pipelines\run_lab7_pipeline.py      # Lab 7: end-to-end coffee pipeline
+python pipelines\run_lab8_quality_gate.py  # Lab 8: metrics quality gate
+python pipelines\run_lab9_failure_tests.py # Lab 9: safe failure-injection tests
+python pipelines\run_lab10_deployment.py   # Lab 10: promote/report/export the champion
+python pipelines\run_lab11_container.py   # Lab 11: build the prediction API image
+```
+
+The Lab 11 API serves coffee score predictions from the stored champion model:
+```powershell
+docker run --rm -p 8000:8000 coffee-quality-mlops:local
+```
+In another terminal:
+```powershell
+Invoke-RestMethod http://localhost:8000/health
+Invoke-RestMethod -Method Post -Uri http://localhost:8000/predict -ContentType 'application/json' -Body (@{
+  species='Arabica'; country_of_origin='Ethiopia'; variety='Heirloom'; processing_method='Washed / Wet'
+  color='Green'; number_of_bags=300; bag_weight='60 kg'; harvest_year='2024'
+  moisture=0.12; category_one_defects=0; quakers=0; category_two_defects=0; altitude_mean_meters=1800
+} | ConvertTo-Json)
+```
+
+Direct Docker commands, after completing Lab 10:
+```powershell
+docker build -t coffee-quality-mlops:local .
+docker run --rm -p 8000:8000 coffee-quality-mlops:local
+```
+
+## MLflow UI
+```powershell
 mlflow ui --backend-store-uri sqlite:///mlflow.db --workers 1 --host 127.0.0.1
 ```
 MLflow ≥ 3 no longer supports the plain `./mlruns` file store, so run metadata is in `mlflow.db`
@@ -48,10 +101,12 @@ when its test-set R² is higher. On Windows, `--workers 1` avoids multi-worker s
 | gbr_n200_d3 | 1.702 | 2.654 | 0.247 |
 | ridge_alpha10 | 1.699 | 2.683 | 0.230 |
 
-Repeated identical runs give identical metrics and bit-identical predictions.
+Repeated identical runs give identical metrics and predictions within a 1e-12 absolute tolerance
+(parallel tree prediction can differ at floating-point rounding precision).
 Modest R² is expected: without tasting scores, metadata explains only part of quality.
 To include the sensory scores (R² ≈ 0.99, but leaky), add `SENSORY` to `NUMERIC` in `src/common.py`.
 
 ## Evidence for your report (Section 14 of the guide)
 Lab 1: notebook + `dataset_metadata.json` · Lab 2: `outputs/` · Lab 3: `git log --oneline --graph --all`, `git tag` ·
-Lab 4: MLflow UI screenshots (compare runs, artifacts) + reproducibility output.
+Lab 4: MLflow UI screenshots (compare runs, artifacts) + reproducibility output · Labs 7–11:
+`reports/`, API tests, `deployment/model_metadata.json`, and the running Docker API.
