@@ -5,6 +5,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 
@@ -21,23 +22,28 @@ def calculate_benchmark() -> dict:
     frame = clean(pd.read_csv(RAW), verbose=False)
     target = frame[TARGET].to_numpy(dtype=float)
     target_bins = pd.qcut(target, 5, labels=False, duplicates="drop")
-    _, test_indices = train_test_split(
+    train_indices, test_indices = train_test_split(
         np.arange(len(frame)),
         test_size=TEST_SIZE,
         random_state=SEED,
         stratify=target_bins,
     )
-    test = frame.iloc[test_indices]
-    actual = test[TARGET].to_numpy(dtype=float)
-    predictions = test[SENSORY].sum(axis=1).to_numpy(dtype=float)
+    omitted_component = "Clean.Cup"
+    benchmark_features = [name for name in SENSORY if name != omitted_component]
+    features = frame[benchmark_features].to_numpy(dtype=float)
+    model = LinearRegression().fit(features[train_indices], target[train_indices])
+    actual = target[test_indices]
+    predictions = model.predict(features[test_indices])
     if not np.isfinite(actual).all() or not np.isfinite(predictions).all():
         raise ValueError("Sensory benchmark inputs and predictions must be finite.")
 
     return {
-        "benchmark": "sensory score reconstruction upper bound",
+        "benchmark": "illustrative sensory score ablation",
         "target": TARGET,
-        "method": f"sum of target-component columns: {', '.join(SENSORY)}",
-        "holdout_rows": int(len(test)),
+        "method": "LinearRegression trained on the training split",
+        "included_components": benchmark_features,
+        "omitted_component": omitted_component,
+        "holdout_rows": int(len(test_indices)),
         "holdout_metrics": {
             "mae": float(mean_absolute_error(actual, predictions)),
             "rmse": float(np.sqrt(mean_squared_error(actual, predictions))),
@@ -47,9 +53,10 @@ def calculate_benchmark() -> dict:
         "target_leakage": True,
         "production_eligible": False,
         "warning": (
-            "The sensory scores are components used to calculate the target. "
-            "This diagnostic demonstrates target leakage and is not a predictive "
-            "model or a valid production performance score."
+            "The included sensory scores are components used to calculate the target. "
+            "This intentionally partial reconstruction is an illustrative target-leakage "
+            "ablation, not a predictive model or a valid production performance score. "
+            "Its R2 is not comparable to the all-component reconstruction or the production model."
         ),
     }
 

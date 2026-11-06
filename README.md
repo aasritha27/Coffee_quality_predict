@@ -134,14 +134,15 @@ scored MAE 1.636, RMSE 2.619, and R² 0.267. The registry retained its existing 
 R² 0.274) because the new candidate did not score higher. Lab 13 writes the measured baseline
 metrics to `logs/lab13_end_to_end_run_log.json` and `reports/drift_monitoring_report.json`.
 
-The Lab 13 workflow also runs a **diagnostic-only sensory reconstruction benchmark**. Summing
-the 10 sensory components on the same held-out split gives R² 0.999993 (MAE 0.0054), with a
-maximum absolute difference of 0.02. This exceeds 0.80, but it is **target leakage**, not a
-predictive model: these scores are the components used to calculate `Total.Cup.Points`. The
-benchmark is explicitly marked `target_leakage: true` and `production_eligible: false` in
-`reports/lab13_sensory_benchmark_report.json`. Lab 13 continues to use the non-sensory model for
-the quality gate and API; its honest holdout R² remains 0.267. A higher honest score requires
-additional predictive data or a different target.
+The Lab 13 workflow also runs an **illustrative, diagnostic-only sensory ablation**. A linear
+regression fitted on nine sensory components, leaving out `Clean.Cup`, scores R² 0.924 (MAE
+0.284) on the held-out split. This is above 0.90, but is still **target leakage**, not valid
+production performance: the included sensory scores are components used to calculate
+`Total.Cup.Points`. The earlier all-component sum scored R² 0.999993; the ablation intentionally
+measures a partial reconstruction and is not comparable to that score or the production model.
+The report marks it `target_leakage: true` and `production_eligible: false`. Lab 13 continues to
+use the non-sensory model for the quality gate and API; its honest holdout R² remains 0.267.
+A higher honest score requires additional predictive data or a different target.
 
 ## Evidence for your report (Section 14 of the guide)
 Lab 1: notebook + `dataset_metadata.json` · Lab 2: `outputs/` · Lab 3: `git log --oneline --graph --all`, `git tag` ·

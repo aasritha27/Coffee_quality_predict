@@ -8,14 +8,14 @@
   "features_with_drift": 0,
   "drifted_features": [],
   "prediction_distribution": {
-    "ks_statistic": 0.072402008648347,
-    "p_value": 0.19933338733445735,
+    "ks_statistic": 0.07147440368252189,
+    "p_value": 0.21117496224413773,
     "status": "OK"
   },
   "holdout_metrics": {
-    "mae": 1.6359019463162319,
-    "rmse": 2.618718209845894,
-    "r2": 0.26662222986334816,
+    "mae": 1.6359019463162303,
+    "rmse": 2.6187182098458934,
+    "r2": 0.2666222298633485,
     "dummy_mae": 1.9599407867206013
   },
   "holdout_beats_dummy": true

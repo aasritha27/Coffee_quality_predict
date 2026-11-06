@@ -1,15 +1,27 @@
 {
-  "benchmark": "sensory score reconstruction upper bound",
+  "benchmark": "illustrative sensory score ablation",
   "target": "Total.Cup.Points",
-  "method": "sum of target-component columns: Aroma, Flavor, Aftertaste, Acidity, Body, Balance, Uniformity, Clean.Cup, Sweetness, Cupper.Points",
+  "method": "LinearRegression trained on the training split",
+  "included_components": [
+    "Aroma",
+    "Flavor",
+    "Aftertaste",
+    "Acidity",
+    "Body",
+    "Balance",
+    "Uniformity",
+    "Sweetness",
+    "Cupper.Points"
+  ],
+  "omitted_component": "Clean.Cup",
   "holdout_rows": 268,
   "holdout_metrics": {
-    "mae": 0.005335820895523898,
-    "rmse": 0.00798786392906671,
-    "r2": 0.9999931764320347,
-    "max_absolute_error": 0.020000000000010232
+    "mae": 0.28390753172102967,
+    "rmse": 0.8453343911809943,
+    "r2": 0.9235799563856947,
+    "max_absolute_error": 9.522723559468872
   },
   "target_leakage": true,
   "production_eligible": false,
-  "warning": "The sensory scores are components used to calculate the target. This diagnostic demonstrates target leakage and is not a predictive model or a valid production performance score."
+  "warning": "The included sensory scores are components used to calculate the target. This intentionally partial reconstruction is an illustrative target-leakage ablation, not a predictive model or a valid production performance score. Its R2 is not comparable to the all-component reconstruction or the production model."
 }
