@@ -28,6 +28,19 @@ Then install the dependencies:
 python -m pip install -r requirements.txt
 ```
 
+The checked-in deployment model was serialized with the versions pinned in
+`requirements-api.txt`. To run the API or integration tests locally, install those matching
+versions after the general requirements:
+```powershell
+python -m pip install -r requirements-api.txt
+python -m pip check
+```
+
+GitHub Actions installs both requirement files and checks for dependency conflicts before
+running the tests. Keep `requirements-api.txt` aligned with the NumPy, pandas, scikit-learn,
+and joblib versions recorded in `deployment/model_metadata.json` whenever the model is
+retrained and exported.
+
 ## Labs 1–6
 ```powershell
 python src\merge_data.py             # Optional: only after re-downloading source CSVs
