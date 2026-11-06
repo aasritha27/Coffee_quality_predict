@@ -25,6 +25,10 @@ STEPS = (
             "-v",
         ),
     ),
+    (
+        "Sensory reconstruction benchmark (diagnostic only; target leakage)",
+        ROOT / "pipelines" / "run_lab13_sensory_benchmark.py",
+    ),
 )
 RUN_LOG = ROOT / "logs" / "lab13_end_to_end_run_log.json"
 
@@ -62,6 +66,26 @@ def main() -> int:
             "holdout_metrics": monitoring_report["holdout_metrics"],
         }
 
+    benchmark_stage = next(
+        (
+            stage
+            for stage in run_log["stages"]
+            if stage["stage"].startswith("Sensory reconstruction benchmark")
+        ),
+        None,
+    )
+    if benchmark_stage and benchmark_stage["status"] == "PASSED":
+        benchmark_report = json.loads(
+            (ROOT / "reports" / "lab13_sensory_benchmark_report.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        run_log["diagnostic_benchmark"] = {
+            "target_leakage": benchmark_report["target_leakage"],
+            "production_eligible": benchmark_report["production_eligible"],
+            "holdout_metrics": benchmark_report["holdout_metrics"],
+        }
+
     run_log["completed_at"] = datetime.now(timezone.utc).isoformat()
     RUN_LOG.parent.mkdir(parents=True, exist_ok=True)
     RUN_LOG.write_text(json.dumps(run_log, indent=2), encoding="utf-8")
@@ -69,6 +93,9 @@ def main() -> int:
     if "monitoring" in run_log:
         holdout_r2 = run_log["monitoring"]["holdout_metrics"]["r2"]
         metric_summary = f" | holdout R2={holdout_r2:.3f}"
+    if "diagnostic_benchmark" in run_log:
+        benchmark_r2 = run_log["diagnostic_benchmark"]["holdout_metrics"]["r2"]
+        metric_summary += f" | diagnostic-only R2={benchmark_r2:.3f} (target leakage)"
     print(f"\n[{run_log['status']}{metric_summary}] Lab 13 run log: {RUN_LOG}")
     return 0 if run_log["status"] == "PASSED" else 1
 

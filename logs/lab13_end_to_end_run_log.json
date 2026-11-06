@@ -1,6 +1,6 @@
 {
   "pipeline": "Coffee Quality MLOps Lab 13",
-  "started_at": "2026-11-06T14:16:07.669222+00:00",
+  "started_at": "2026-11-06T14:21:40.672911+00:00",
   "stages": [
     {
       "stage": "Lab 7 pipeline",
@@ -26,17 +26,32 @@
       "stage": "Production API integration tests",
       "status": "PASSED",
       "exit_code": 0
+    },
+    {
+      "stage": "Sensory reconstruction benchmark (diagnostic only; target leakage)",
+      "status": "PASSED",
+      "exit_code": 0
     }
   ],
   "status": "PASSED",
   "monitoring": {
     "status": "STABLE",
     "holdout_metrics": {
-      "mae": 1.6359019463162308,
-      "rmse": 2.6187182098458934,
-      "r2": 0.2666222298633484,
+      "mae": 1.6359019463162319,
+      "rmse": 2.618718209845894,
+      "r2": 0.26662222986334816,
       "dummy_mae": 1.9599407867206013
     }
   },
-  "completed_at": "2026-11-06T14:17:14.745014+00:00"
+  "diagnostic_benchmark": {
+    "target_leakage": true,
+    "production_eligible": false,
+    "holdout_metrics": {
+      "mae": 0.005335820895523898,
+      "rmse": 0.00798786392906671,
+      "r2": 0.9999931764320347,
+      "max_absolute_error": 0.020000000000010232
+    }
+  },
+  "completed_at": "2026-11-06T14:22:50.111073+00:00"
 }
