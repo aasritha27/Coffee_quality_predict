@@ -1,4 +1,4 @@
-# Coffee Quality Prediction — MLOps Labs 1–11
+# Coffee Quality Prediction — MLOps Labs 1–13
 
 Regression project on the Coffee Quality Institute (CQI) data
 (<https://www.kaggle.com/datasets/volpatto/coffee-quality-database-from-cqi>).
@@ -52,6 +52,26 @@ python pipelines\run_lab9_failure_tests.py # Lab 9: safe failure-injection tests
 python pipelines\run_lab10_deployment.py   # Lab 10: promote/report/export the champion
 python pipelines\run_lab11_container.py   # Lab 11: build the prediction API image
 ```
+
+## Labs 12–13
+
+Lab 12 compares the saved training and holdout feature/prediction distributions with a
+two-sample Kolmogorov–Smirnov test, reports holdout regression metrics, and writes
+`reports/drift_monitoring_report.json`. Run it after Labs 1–2:
+```powershell
+python pipelines\run_lab12_monitoring.py
+```
+
+Lab 13 runs the validated pipeline, quality gate, champion deployment preparation, Lab 12
+monitoring, and integration tests against the prepared production API model. Its stage
+results are written to `logs/lab13_end_to_end_run_log.json`:
+```powershell
+python pipelines\run_lab13_end_to_end.py
+```
+
+The monitor compares the project’s saved training and test splits; it does not ingest an
+external production batch. A drift report is evidence for review, not an automatic promotion
+or retraining decision.
 
 The Lab 11 API serves coffee score predictions from the stored champion model:
 ```powershell
