@@ -41,8 +41,10 @@ python scripts\run_lab5_pipeline.py  # Lab 5: validation/preprocessing/reproduci
 python scripts\run_lab6_registry.py  # Lab 6: candidate/champion registry lifecycle
 ```
 
-Lab 3 is an intentional Git exercise: it creates commits, branches, a merge conflict, a revert, and a tag.
-Run it only in a disposable clone or after saving/committing your own work.
+Lab 3 is an intentional Git-history exercise: it creates commits, branches, a merge conflict, a
+revert, and a tag, and edits `src/train.py`. Do not run it in your working repository; use a
+disposable clone only. Its walkthrough also assumes the older `max_depth=10` training line, so
+update the exercise to match the current `RF_PARAMS` configuration before running it.
 
 ## Labs 7–11
 ```powershell
@@ -52,6 +54,9 @@ python pipelines\run_lab9_failure_tests.py # Lab 9: safe failure-injection tests
 python pipelines\run_lab10_deployment.py   # Lab 10: promote/report/export the champion
 python pipelines\run_lab11_container.py   # Lab 11: build the prediction API image
 ```
+
+For Lab 11, start Docker Desktop and wait for its engine to become ready before building. If the
+Docker daemon is unavailable, the container build will fail even when the Docker CLI is installed.
 
 ## Labs 12–13
 
@@ -72,6 +77,11 @@ python pipelines\run_lab13_end_to_end.py
 The monitor compares the project’s saved training and test splits; it does not ingest an
 external production batch. A drift report is evidence for review, not an automatic promotion
 or retraining decision.
+
+Run the complete test suite from the project root:
+```powershell
+python -m unittest discover -s tests -v
+```
 
 The Lab 11 API serves coffee score predictions from the stored champion model:
 ```powershell
