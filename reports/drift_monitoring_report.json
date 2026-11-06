@@ -1,0 +1,22 @@
+{
+  "status": "STABLE",
+  "method": "two-sample Kolmogorov-Smirnov test",
+  "significance_level": 0.01,
+  "reference": "training feature and prediction distributions",
+  "current": "held-out test feature and prediction distributions",
+  "features_analyzed": 63,
+  "features_with_drift": 0,
+  "drifted_features": [],
+  "prediction_distribution": {
+    "ks_statistic": 0.07147440368252189,
+    "p_value": 0.21117496224413773,
+    "status": "OK"
+  },
+  "holdout_metrics": {
+    "mae": 1.6359019463162308,
+    "rmse": 2.6187182098458934,
+    "r2": 0.2666222298633484,
+    "dummy_mae": 1.9599407867206013
+  },
+  "holdout_beats_dummy": true
+}

@@ -8,7 +8,7 @@ from mlflow.models import infer_signature
 from mlflow.tracking import MlflowClient
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from common import MODELS, PROC, SEED
+from common import MODELS, PROC, RF_PARAMS
 from registry_utils import MODEL_NAME, configure_tracking
 
 
@@ -20,7 +20,7 @@ def train_and_register_model() -> str:
     y_test = np.load(PROC / "y_test.npy")
     metadata = json.loads((PROC / "dataset_metadata.json").read_text(encoding="utf-8"))
 
-    params = {"n_estimators": 200, "max_depth": 15, "random_state": SEED, "n_jobs": -1}
+    params = dict(RF_PARAMS)
     client = MlflowClient()
     with mlflow.start_run(run_name="coffee_random_forest_candidate") as run:
         model = RandomForestRegressor(**params).fit(X_train, y_train)

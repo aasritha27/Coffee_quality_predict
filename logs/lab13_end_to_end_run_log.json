@@ -1,0 +1,42 @@
+{
+  "pipeline": "Coffee Quality MLOps Lab 13",
+  "started_at": "2026-11-06T14:16:07.669222+00:00",
+  "stages": [
+    {
+      "stage": "Lab 7 pipeline",
+      "status": "PASSED",
+      "exit_code": 0
+    },
+    {
+      "stage": "Lab 8 quality gate",
+      "status": "PASSED",
+      "exit_code": 0
+    },
+    {
+      "stage": "Deployment preparation",
+      "status": "PASSED",
+      "exit_code": 0
+    },
+    {
+      "stage": "Lab 12 monitoring",
+      "status": "PASSED",
+      "exit_code": 0
+    },
+    {
+      "stage": "Production API integration tests",
+      "status": "PASSED",
+      "exit_code": 0
+    }
+  ],
+  "status": "PASSED",
+  "monitoring": {
+    "status": "STABLE",
+    "holdout_metrics": {
+      "mae": 1.6359019463162308,
+      "rmse": 2.6187182098458934,
+      "r2": 0.2666222298633484,
+      "dummy_mae": 1.9599407867206013
+    }
+  },
+  "completed_at": "2026-11-06T14:17:14.745014+00:00"
+}

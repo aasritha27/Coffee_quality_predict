@@ -108,7 +108,7 @@ when its test-set R² is higher. On Windows, `--workers 1` avoids multi-worker s
 - **Cleaning:** drops one 0-point lot; altitude > 5000 m and moisture > 0.5 set to missing; bag weight (kg) and harvest year parsed from text; median/“Unknown” imputation fit on train only.
 - **Split:** 80/20, `random_state=42`, stratified on target quintiles.
 
-## Results (test set, 268 rows)
+## Lab 4 experiment results (test set, 268 rows)
 | Run | MAE | RMSE | R² |
 |---|---|---|---|
 | mean-prediction dummy | 1.96 | – | 0.00 |
@@ -124,7 +124,21 @@ when its test-set R² is higher. On Windows, `--workers 1` avoids multi-worker s
 Repeated identical runs give identical metrics and predictions within a 1e-12 absolute tolerance
 (parallel tree prediction can differ at floating-point rounding precision).
 Modest R² is expected: without tasting scores, metadata explains only part of quality.
-To include the sensory scores (R² ≈ 0.99, but leaky), add `SENSORY` to `NUMERIC` in `src/common.py`.
+
+## Lab 13 model selection and score
+
+The Lab 13 workflow uses a Random Forest selected by five-fold cross-validation on the training
+split only (`n_estimators=500`, `max_features=0.8`, `min_samples_leaf=2`). Its mean cross-validation
+R² was 0.205 (standard deviation 0.034). On the untouched 268-row holdout, the resulting baseline
+scored MAE 1.636, RMSE 2.619, and R² 0.267. The registry retained its existing champion (holdout
+R² 0.274) because the new candidate did not score higher. Lab 13 writes the measured baseline
+metrics to `logs/lab13_end_to_end_run_log.json` and `reports/drift_monitoring_report.json`.
+
+An R² of 0.8 is not supported by this dataset with the available non-sensory predictors. The
+10 sensory scores are excluded because they nearly sum to `Total.Cup.Points`; their sum alone
+has R² 0.99998 against the target, with a maximum per-row difference of 0.5. Including those
+scores would leak the answer rather than improve a valid prediction model. Reaching a higher
+honest score requires additional predictive data or a different prediction target.
 
 ## Evidence for your report (Section 14 of the guide)
 Lab 1: notebook + `dataset_metadata.json` · Lab 2: `outputs/` · Lab 3: `git log --oneline --graph --all`, `git tag` ·

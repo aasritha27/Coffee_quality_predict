@@ -49,10 +49,27 @@ def main() -> int:
     else:
         run_log["status"] = "PASSED"
 
+    monitoring_stage = next(
+        (stage for stage in run_log["stages"] if stage["stage"] == "Lab 12 monitoring"),
+        None,
+    )
+    if monitoring_stage and monitoring_stage["status"] == "PASSED":
+        monitoring_report = json.loads(
+            (ROOT / "reports" / "drift_monitoring_report.json").read_text(encoding="utf-8")
+        )
+        run_log["monitoring"] = {
+            "status": monitoring_report["status"],
+            "holdout_metrics": monitoring_report["holdout_metrics"],
+        }
+
     run_log["completed_at"] = datetime.now(timezone.utc).isoformat()
     RUN_LOG.parent.mkdir(parents=True, exist_ok=True)
     RUN_LOG.write_text(json.dumps(run_log, indent=2), encoding="utf-8")
-    print(f"\n[{run_log['status']}] Lab 13 run log: {RUN_LOG}")
+    metric_summary = ""
+    if "monitoring" in run_log:
+        holdout_r2 = run_log["monitoring"]["holdout_metrics"]["r2"]
+        metric_summary = f" | holdout R2={holdout_r2:.3f}"
+    print(f"\n[{run_log['status']}{metric_summary}] Lab 13 run log: {RUN_LOG}")
     return 0 if run_log["status"] == "PASSED" else 1
 
 
