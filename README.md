@@ -150,6 +150,12 @@ Modest R² is expected: without tasting scores, metadata explains only part of q
 
 ## Lab 13 model selection and score
 
+**R² summary on the 268-row holdout:** the highest production-eligible score is **0.274**
+(the registry champion); the non-sensory Lab 13 baseline scores **0.267**. The requested
+**0.90+ score is 0.924** from a sensory-feature diagnostic only, and is not production-eligible
+because it leaks target components. Summing all 10 sensory components gives **0.999993**, an
+even more direct target reconstruction—not a valid model score.
+
 The Lab 13 workflow uses a Random Forest selected by five-fold cross-validation on the training
 split only (`n_estimators=500`, `max_features=0.8`, `min_samples_leaf=2`). Its mean cross-validation
 R² was 0.205 (standard deviation 0.034). On the untouched 268-row holdout, the resulting baseline
